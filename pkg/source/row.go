@@ -3,6 +3,7 @@ package source
 import (
 	"encoding/json"
 	"fmt"
+	"reflect"
 	"time"
 
 	"github.com/Shopify/sarama"
@@ -74,6 +75,7 @@ func (r Row) Params() ([]string, []interface{}) {
 	for _, item := range r.Items {
 		keys = append(keys, item.Field)
 		values = append(values, item.Value)
+		fmt.Println("-----------", item.Field, item.Value, item.Type, reflect.TypeOf(item.Value))
 	}
 	return keys, values
 }

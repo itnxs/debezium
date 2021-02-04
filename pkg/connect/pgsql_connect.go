@@ -22,6 +22,9 @@ func NewPgsqlConnect() (*PgsqlConnect, error) {
 	if err != nil {
 		return nil, errors.Wrap(err, "open pgsql")
 	}
+	if err := db.Ping(); err != nil {
+		return nil, errors.Wrap(err, "ping pgsql")
+	}
 	return &PgsqlConnect{db: db}, nil
 }
 

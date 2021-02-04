@@ -4,6 +4,7 @@ go 1.14
 
 require (
 	github.com/BurntSushi/toml v0.3.1
+	github.com/ClickHouse/clickhouse-go v1.4.3
 	github.com/Masterminds/squirrel v1.5.0
 	github.com/Shopify/sarama v1.27.2
 	github.com/go-sql-driver/mysql v1.5.0

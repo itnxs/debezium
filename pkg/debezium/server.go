@@ -58,6 +58,15 @@ func NewServer() (*Server, error) {
 		logrus.Info("add ElasticConnect")
 	}
 
+	if c.ClickHouse.Enable {
+		ch, err := connect.NewClickHouseConnect()
+		if err != nil {
+			return nil, err
+		}
+		connects = append(connects, ch)
+		logrus.Info("add ClickHouseConnect")
+	}
+
 	return &Server{
 		client:   client,
 		connects: connects,

@@ -27,3 +27,15 @@ CREATE TABLE `new_users` (
 --   "create_time" int4,
 --   CONSTRAINT "pk.users" PRIMARY KEY ("user_id")
 -- );
+
+-- ClickHouse
+--
+-- CREATE TABLE default.users
+-- (
+--
+--     `user_id` Int64,
+--     `name` String,
+--     `email` String,
+--     `create_time` Int64
+-- )
+-- ENGINE = MergeTree PARTITION BY user_id order by user_id;

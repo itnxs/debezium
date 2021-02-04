@@ -1,12 +1,26 @@
 # github.com/BurntSushi/toml v0.3.1
 ## explicit
 github.com/BurntSushi/toml
+# github.com/ClickHouse/clickhouse-go v1.4.3
+## explicit
+github.com/ClickHouse/clickhouse-go
+github.com/ClickHouse/clickhouse-go/lib/binary
+github.com/ClickHouse/clickhouse-go/lib/cityhash102
+github.com/ClickHouse/clickhouse-go/lib/column
+github.com/ClickHouse/clickhouse-go/lib/data
+github.com/ClickHouse/clickhouse-go/lib/leakypool
+github.com/ClickHouse/clickhouse-go/lib/lz4
+github.com/ClickHouse/clickhouse-go/lib/protocol
+github.com/ClickHouse/clickhouse-go/lib/types
+github.com/ClickHouse/clickhouse-go/lib/writebuffer
 # github.com/Masterminds/squirrel v1.5.0
 ## explicit
 github.com/Masterminds/squirrel
 # github.com/Shopify/sarama v1.27.2
 ## explicit
 github.com/Shopify/sarama
+# github.com/cloudflare/golz4 v0.0.0-20150217214814-ef862a3cdc58
+github.com/cloudflare/golz4
 # github.com/davecgh/go-spew v1.1.1
 github.com/davecgh/go-spew/spew
 # github.com/eapache/go-resiliency v1.2.0

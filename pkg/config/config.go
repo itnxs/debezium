@@ -11,10 +11,11 @@ var c = Config{}
 
 // Config config
 type Config struct {
-	Kafka Kafka `toml:"kafka"`
-	Mysql Mysql `toml:"mysql"`
-	Pgsql Pgsql `toml:"pgsql"`
-	ES    ES    `toml:"elasticsearch"`
+	Kafka      Kafka      `toml:"kafka"`
+	Mysql      Mysql      `toml:"mysql"`
+	Pgsql      Pgsql      `toml:"pgsql"`
+	ClickHouse ClickHouse `toml:"clickhouse"`
+	ES         ES         `toml:"elasticsearch"`
 }
 
 // Kafka kafka
@@ -33,6 +34,13 @@ type Mysql struct {
 
 // Pgsql pgsql
 type Pgsql struct {
+	Enable bool              `toml:"enable"`
+	DNS    string            `toml:"dns"`
+	Tables map[string]string `toml:"tables"`
+}
+
+// ClickHouse clickhouse
+type ClickHouse struct {
 	Enable bool              `toml:"enable"`
 	DNS    string            `toml:"dns"`
 	Tables map[string]string `toml:"tables"`
@@ -72,6 +80,14 @@ func (m Mysql) TableName(name string) string {
 
 // TableName pgsql table name
 func (m Pgsql) TableName(name string) string {
+	if v, ok := m.Tables[name]; ok {
+		return v
+	}
+	return name
+}
+
+// TableName clickhouse table name
+func (m ClickHouse) TableName(name string) string {
 	if v, ok := m.Tables[name]; ok {
 		return v
 	}

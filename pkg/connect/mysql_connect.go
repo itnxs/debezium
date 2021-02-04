@@ -22,6 +22,9 @@ func NewMysqlConnect() (*MysqlConnect, error) {
 	if err != nil {
 		return nil, errors.Wrap(err, "open mysql")
 	}
+	if err := db.Ping(); err != nil {
+		return nil, errors.Wrap(err, "ping mysql")
+	}
 	return &MysqlConnect{db: db}, nil
 }
 
