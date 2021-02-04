@@ -1,0 +1,28 @@
+## kafka source
+[kafka]
+    brokers = "127.0.0.1:9092"
+    topic = "users"
+    group = "debezium"
+
+## mysql connect
+[mysql]
+    enable = true
+    dns = "root:123456@tcp(127.0.0.1:3306)/demo?charset=utf8mb4&autocommit=true"
+    [mysql.tables]
+        "users" = "new_users"
+
+## pgsql connect
+[pgsql]
+    enable = true
+    dns = "host=127.0.0.1 port=5432 user=postgres password=postgres dbname=postgres sslmode=disable"
+    [pgsql.tables]
+        "users" = "users"
+
+## elasticsearch connect
+[elasticsearch]
+    enable = true
+    url = "http://127.0.0.1:9200"
+    user = ""
+    password = ""
+    [elasticsearch.indexes]
+        "users" = "users"
