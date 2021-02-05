@@ -56,3 +56,9 @@ services:
       - discovery.type=single-node
     ports:
       - 9200:9200
+  clickhouse:
+    image: yandex/clickhouse-server
+    container_name: debezium_clickhouse
+    ports:
+      - 8123:8123
+      - 9000:9000
