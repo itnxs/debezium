@@ -18,6 +18,10 @@ func init() {
 	flag.StringVar(&configFile, "conf", "./etc/config.toml", "load config file")
 	flag.Parse()
 
+	logrus.SetFormatter(&logrus.TextFormatter{
+		FullTimestamp: true,
+	})
+
 	err := config.Load(configFile)
 	if err != nil {
 		logrus.Panicln(err)
