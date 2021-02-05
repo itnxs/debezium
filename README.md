@@ -1,5 +1,5 @@
 # debezium-server
-使用Golang处理debezium数据同步,目前mysql和postgres同步到mysql,postgres,elasticsearch,clickhouse
+使用Golang处理debezium数据同步,支持mysql和postgres同步到mysql,postgres,elasticsearch,clickhouse
 
 ## 运行
 ```
