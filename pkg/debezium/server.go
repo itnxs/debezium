@@ -90,6 +90,10 @@ func (s *Server) handler(ctx context.Context, session sarama.ConsumerGroupSessio
 		return err
 	}
 
+	if row.Empty() {
+		return nil
+	}
+
 	for _, c := range s.connects {
 		err := s.change(ctx, c, row)
 		if err != nil {

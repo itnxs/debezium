@@ -7,9 +7,10 @@ type FieldType string
 
 // field type
 const (
-	Struct FieldType = "struct"
-	String FieldType = "string"
-	Int64  FieldType = "int64"
+	Struct  FieldType = "struct"
+	String  FieldType = "string"
+	Int64   FieldType = "int64"
+	Float64 FieldType = "float64"
 )
 
 // Fields fields
@@ -95,5 +96,3 @@ func (k Key) isPrimary(name string) bool {
 	_, ok := k.Payload[name]
 	return ok
 }
-
-

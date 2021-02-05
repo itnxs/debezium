@@ -3,7 +3,7 @@ package source
 import (
 	"encoding/json"
 	"fmt"
-	"reflect"
+	"strconv"
 	"time"
 
 	"github.com/Shopify/sarama"
@@ -68,6 +68,17 @@ func (r Row) Maps() map[string]interface{} {
 	return rs
 }
 
+// Updates
+func (r Row) Updates() map[string]interface{} {
+	rs := make(map[string]interface{}, 0)
+	for _, item := range r.Items {
+		if !item.PrimaryKey {
+			rs[item.Field] = item.Value
+		}
+	}
+	return rs
+}
+
 // Params
 func (r Row) Params() ([]string, []interface{}) {
 	keys := make([]string, 0)
@@ -75,13 +86,16 @@ func (r Row) Params() ([]string, []interface{}) {
 	for _, item := range r.Items {
 		keys = append(keys, item.Field)
 		values = append(values, item.Value)
-		fmt.Println("-----------", item.Field, item.Value, item.Type, reflect.TypeOf(item.Value))
 	}
 	return keys, values
 }
 
 // ParseMessage parse consumer message
 func ParseMessage(m *sarama.ConsumerMessage) (Row, error) {
+	if len(m.Value) <= 0 || len(m.Key) <= 0 {
+		return Row{}, nil
+	}
+
 	key := &Key{}
 	err := json.Unmarshal(m.Key, &key)
 	if err != nil {
@@ -131,14 +145,33 @@ func ParseMessage(m *sarama.ConsumerMessage) (Row, error) {
 		if err != nil {
 			return Row{}, fmt.Errorf("find field %s", k)
 		}
+
+		value, err := formatValue(fd.Type, v)
+		if err != nil {
+			return Row{}, fmt.Errorf("format value %s", v)
+		}
+
 		row.Items = append(row.Items, &Item{
 			Type:       fd.Type,
 			Field:      k,
-			Value:      v,
+			Value:      value,
 			Optional:   fd.Optional,
 			PrimaryKey: key.isPrimary(k),
 		})
 	}
 
 	return row, nil
+}
+
+// formatValue 格式化值
+func formatValue(t FieldType, v interface{}) (interface{}, error) {
+	s := fmt.Sprintf("%v", v)
+	switch t {
+	case Int64:
+		return strconv.ParseInt(s, 10, 64)
+	case Float64:
+		return strconv.ParseFloat(s, 64)
+	default:
+		return s, nil
+	}
 }

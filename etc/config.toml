@@ -20,7 +20,7 @@
 
 ## clickhouse connect
 [clickhouse]
-    enable = true
+    enable = false
     dns = "tcp://127.0.0.1:9000?debug=false"
     [clickhouse.tables]
         "users" = "default.users"
